@@ -6,6 +6,7 @@ import { Work } from './components/Work'
 import { Technologies } from './components/Technologies'
 import { Philosophy } from './components/Philosophy'
 import { Contact } from './components/Contact'
+import { Footer } from './components/Footer'
 import { ScrollManager } from './components/ScrollManager'
 import { CategoryPage } from './pages/CategoryPage'
 
@@ -34,6 +35,7 @@ export default function App() {
         </Routes>
       </main>
       <Contact />
+      <Footer />
     </>
   )
 }

@@ -2,24 +2,35 @@ import { profile } from '../data/content'
 import { Reveal } from './Reveal'
 
 export function Contact() {
+  const rows = [
+    { label: 'Email', value: profile.email, href: `mailto:${profile.email}` },
+    { label: 'Facebook', value: 'Facebook', href: profile.facebook, external: true },
+    { label: 'Location', value: profile.location },
+  ]
+
   return (
-    <footer id="contact" className="bg-graphite text-paper">
+    <section id="contact" className="bg-graphite text-paper">
       <div className="mx-auto max-w-6xl px-6 py-28 md:px-10 md:py-36">
         <Reveal as="h2" className="font-display text-5xl md:text-7xl">Reach out &amp; connect</Reveal>
-        <Reveal delay={0.2} className="mt-10 flex flex-wrap gap-4">
-          <a href={`mailto:${profile.email}`} className="rounded-full bg-paper px-7 py-3.5 text-sm font-medium text-ink transition-colors hover:bg-stone">
-            {profile.email}
-          </a>
-          <a href={profile.facebook} target="_blank" rel="noreferrer" className="rounded-full border border-ash px-7 py-3.5 text-sm transition-colors hover:border-paper">
-            Facebook
-          </a>
+        <Reveal stagger className="mt-14 divide-y divide-slate border-y border-slate">
+          {rows.map((r) => (
+            <div key={r.label} className="flex flex-wrap items-baseline justify-between gap-x-8 gap-y-1 py-6">
+              <span className="text-xs tracking-[0.2em] text-stone uppercase">{r.label}</span>
+              {r.href ? (
+                <a
+                  href={r.href}
+                  {...(r.external ? { target: '_blank', rel: 'noreferrer' } : {})}
+                  className="font-display text-2xl underline decoration-slate underline-offset-8 transition-colors hover:decoration-paper md:text-4xl"
+                >
+                  {r.value}
+                </a>
+              ) : (
+                <span className="font-display text-2xl md:text-4xl">{r.value}</span>
+              )}
+            </div>
+          ))}
         </Reveal>
-        <Reveal as="p" delay={0.3} className="mt-8 text-stone">{profile.location}</Reveal>
-        <div className="mt-24 flex flex-wrap justify-between gap-4 border-t border-slate pt-6 text-xs text-stone">
-          <span>{profile.name} · {profile.section}</span>
-          <span>Digital Portfolio</span>
-        </div>
       </div>
-    </footer>
+    </section>
   )
 }

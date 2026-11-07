@@ -69,7 +69,7 @@ export const moreProjects: MoreProject[] = Array.from({ length: 6 }, () => ({
 export const technologies = [
   { id: 'frontend', label: 'Front End', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript'] },
   { id: 'backend', label: 'Back End', items: ['Python', 'Java'] },
-  { id: 'tools', label: 'Tools', items: ['Git', 'GitHub', 'Antigravity', 'Canva', 'Adobe Illustrator', 'Stop Motion Studio'] },
+  { id: 'tools', label: 'Tools', items: ['Git', 'GitHub', 'Antigravity', 'Canva', 'Adobe Illustrator', 'Stop Motion Studio', 'Vercel'] },
 ]
 
 export const credentials = {
