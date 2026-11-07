@@ -22,12 +22,12 @@ export function CategoryPage() {
   return (
     <section className="bg-mist pt-40 pb-28 md:pb-40">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
-        <Link to="/#work" className="text-xs tracking-[0.2em] text-ash uppercase transition-colors hover:text-ink">
+        <Link to="/#work" className="text-sm text-slate underline-offset-4 transition-colors hover:text-ink hover:underline">
           ← Portfolio exhibits
         </Link>
         <Reveal as="h1" delay={0.1} className="mt-10 font-display text-5xl text-ink md:text-7xl">{category.category}</Reveal>
         <Reveal as="p" delay={0.2} className={`mt-4 text-lg ${accents[category.accent].text}`}>{category.term}</Reveal>
-        <Reveal as="p" delay={0.3} className="mt-3 max-w-md text-slate">{category.description}</Reveal>
+        <Reveal as="p" delay={0.3} className="mt-3 max-w-md text-pretty text-slate">{category.description}</Reveal>
 
         <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {moreProjectsFor(category.term).map((p, i) => (

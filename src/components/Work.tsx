@@ -3,15 +3,18 @@ import { projects } from '../data/content'
 import { DrawingSheet } from './DrawingSheet'
 import { accents } from '../data/accents'
 import { Reveal } from './Reveal'
+import { Rule } from './Rule'
 
 export function Work() {
   return (
     <section id="work" className="bg-mist py-28 md:py-40">
       <div className="mx-auto max-w-6xl px-6 md:px-10">
         <Reveal as="h2" className="font-display text-4xl text-ink md:text-5xl">Portfolio exhibits</Reveal>
-        <div className="mt-14 border-t border-stone">
+        <div className="mt-14">
+          <Rule />
           {projects.map((p, i) => (
-            <Reveal key={p.term} as="article" className="grid items-center gap-8 border-b border-stone py-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
+            <div key={p.term}>
+            <Reveal as="article" className="grid items-center gap-8 py-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
               <div className={i % 2 ? 'md:order-2' : ''}>
                 <DrawingSheet src={p.image} alt={p.title} exhibit={p.term} sheet={`A-10${i + 1}`} accent={p.accent} />
               </div>
@@ -21,7 +24,7 @@ export function Work() {
                 {p.category && <p className={`mt-3 text-lg ${accents[p.accent].text}`}>{p.category}</p>}
                 <p className={`${p.category ? 'mt-8' : 'mt-5'} max-w-md font-display text-2xl text-balance text-ink`}>{p.title}</p>
                 {p.course && <p className="mt-1 text-sm text-slate">{p.course}</p>}
-                {p.description && <p className="mt-4 max-w-md leading-relaxed text-slate">{p.description}</p>}
+                {p.description && <p className="mt-4 max-w-md leading-relaxed text-pretty text-slate">{p.description}</p>}
                 {p.slug && (
                   <Link
                     to={`/category/${p.slug}`}
@@ -33,6 +36,8 @@ export function Work() {
                 )}
               </div>
             </Reveal>
+            <Rule />
+            </div>
           ))}
         </div>
       </div>

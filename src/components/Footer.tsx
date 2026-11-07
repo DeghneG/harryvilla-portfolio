@@ -1,4 +1,8 @@
+import { useRef } from 'react'
 import { Link } from 'react-router-dom'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { profile } from '../data/content'
 
 const nav = [
@@ -9,13 +13,39 @@ const nav = [
   { to: '/#contact', label: 'Contact' },
 ]
 
+gsap.registerPlugin(ScrollTrigger, useGSAP)
+
 const linkClass = 'transition-colors hover:text-bronze-soft'
 
 export function Footer() {
+  const root = useRef<HTMLElement>(null)
+  const arcade = useRef<SVGSVGElement>(null)
+
+  // The arches are drawn left to right as the footer comes into view.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(
+          arcade.current,
+          { clipPath: 'inset(0 100% 0 0)' },
+          {
+            clipPath: 'inset(0 0% 0 0)',
+            duration: 2.4,
+            ease: 'power3.inOut',
+            scrollTrigger: { trigger: arcade.current, start: 'top 100%', once: true },
+          },
+        )
+      })
+      return () => mm.revert()
+    },
+    { scope: root },
+  )
+
   return (
-    <footer className="bg-ink text-stone">
+    <footer ref={root} className="bg-ink text-stone">
       {/* A row of arches: the site's ancient/modern idea, drawn in hairlines. */}
-      <svg aria-hidden className="block h-14 w-full text-slate" preserveAspectRatio="xMidYMax slice">
+      <svg ref={arcade} aria-hidden className="block h-14 w-full text-slate" preserveAspectRatio="xMidYMax slice">
         <defs>
           <pattern id="arcade" width="72" height="56" patternUnits="userSpaceOnUse">
             <path d="M12 56V28a24 24 0 0 1 48 0v28" fill="none" stroke="currentColor" strokeWidth="1" />

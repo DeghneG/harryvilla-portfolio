@@ -1,18 +1,52 @@
+import { useRef } from 'react'
+import gsap from 'gsap'
+import { ScrollTrigger } from 'gsap/ScrollTrigger'
+import { useGSAP } from '@gsap/react'
 import { profile } from '../data/content'
 import { Reveal } from './Reveal'
 import { InteractiveGrid } from './ui/interactive-grid'
 
+gsap.registerPlugin(ScrollTrigger, useGSAP)
+
 export function Hero() {
   const words = profile.name.split(' ')
+  const section = useRef<HTMLElement>(null)
+  const photo = useRef<HTMLImageElement>(null)
+
+  // Parallax: the photo drifts down and eases in as the hero scrolls away.
+  useGSAP(
+    () => {
+      const mm = gsap.matchMedia()
+      mm.add('(prefers-reduced-motion: no-preference)', () => {
+        gsap.fromTo(
+          photo.current,
+          { yPercent: 0, scale: 1.06 },
+          {
+            yPercent: 12,
+            scale: 1.18,
+            ease: 'none',
+            scrollTrigger: { trigger: section.current, start: 'top top', end: 'bottom top', scrub: true },
+          },
+        )
+      })
+      return () => mm.revert()
+    },
+    { scope: section },
+  )
 
   return (
-    <section id="top" className="relative isolate flex min-h-[92svh] items-center justify-center overflow-hidden bg-mist text-ink">
+    <section
+      ref={section}
+      id="top"
+      className="relative isolate flex min-h-[92svh] items-center justify-center overflow-hidden bg-mist text-ink"
+    >
       <img
+        ref={photo}
         src="/building_white_minimalism_153610_1920x1080.jpg"
         alt=""
         aria-hidden
         fetchPriority="high"
-        className="absolute inset-0 -z-10 size-full object-cover"
+        className="absolute inset-0 -z-10 size-full object-cover will-change-transform"
       />
       {/* Multiply tint pulls the white photo into the site's gray. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-mist mix-blend-multiply" />
