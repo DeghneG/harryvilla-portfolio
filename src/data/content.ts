@@ -10,11 +10,6 @@ export const profile = {
   philosophy: 'Combines historical weight with contemporary innovation.',
 }
 
-export const categories = [
-  { id: 'ancient', title: 'Ancient Architecture' },
-  { id: 'modern', title: 'Modern Architecture' },
-]
-
 export interface Project {
   term: 'Prelim' | 'Midterm' | 'Finals'
   /** Exhibit category (from the sitemap). Also the title of its "more projects" page. */
@@ -73,8 +68,8 @@ export const moreProjects: MoreProject[] = Array.from({ length: 6 }, () => ({
 /** Edit these lists to match your own skills. */
 export const technologies = [
   { id: 'frontend', label: 'Front End', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript'] },
-  { id: 'backend', label: 'Back End', items: ['Python', 'Java', 'PHP', 'SQL'] },
-  { id: 'tools', label: 'Tools', items: ['Git', 'GitHub', 'VS Code', 'Figma'] },
+  { id: 'backend', label: 'Back End', items: ['Python', 'Java'] },
+  { id: 'tools', label: 'Tools', items: ['Git', 'GitHub', 'Antigravity', 'Canva', 'Adobe Illustrator', 'Stop Motion Studio'] },
 ]
 
 export const credentials = {
@@ -84,5 +79,6 @@ export const credentials = {
   education: [
     { level: 'Highschool', years: '2016–2022' },
     { level: 'Senior High', years: '2022–2024' },
+    { level: 'College', years: '2024–Present' },
   ],
 }

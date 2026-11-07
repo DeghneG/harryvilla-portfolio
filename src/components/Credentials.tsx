@@ -3,7 +3,7 @@ import { Reveal } from './Reveal'
 
 export function Credentials() {
   return (
-    <div id="credentials" className="mt-20 grid gap-12 border-t border-stone pt-16 md:mt-28 md:grid-cols-[1fr_1.6fr] md:gap-20">
+    <div id="credentials" className="grid gap-12 md:grid-cols-[1fr_1.6fr] md:gap-20">
       <Reveal as="h2" className="font-display text-4xl text-ink md:text-5xl">About me</Reveal>
       <Reveal stagger className="divide-y divide-stone border-y border-stone">
         <div className="py-6">
