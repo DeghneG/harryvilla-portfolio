@@ -6,8 +6,17 @@ export function Hero() {
   const words = profile.name.split(' ')
 
   return (
-    <section id="top" className="relative flex min-h-[92svh] items-center justify-center overflow-hidden bg-mist text-ink">
-      <InteractiveGrid className="[mask-image:radial-gradient(640px_circle_at_center,white,transparent)]" />
+    <section id="top" className="relative isolate flex min-h-[92svh] items-center justify-center overflow-hidden bg-mist text-ink">
+      <img
+        src="/building_white_minimalism_153610_1920x1080.jpg"
+        alt=""
+        aria-hidden
+        fetchPriority="high"
+        className="absolute inset-0 -z-10 size-full object-cover"
+      />
+      {/* Multiply tint pulls the white photo into the site's gray. */}
+      <div aria-hidden className="absolute inset-0 -z-10 bg-mist mix-blend-multiply" />
+      <InteractiveGrid className="[--grid-heat:var(--color-bronze)] [mask-image:radial-gradient(640px_circle_at_center,white,transparent)]" />
       <div className="relative z-10 mx-auto w-full max-w-6xl px-6 py-32 text-center md:px-10">
         <h1 aria-label={profile.name} className="font-display text-6xl leading-[0.95] tracking-tight text-balance md:text-8xl">
           {words.map((w, i) => (
@@ -21,9 +30,8 @@ export function Hero() {
           {profile.motto}
         </Reveal>
       </div>
-      <div className="absolute inset-x-0 bottom-0 z-10 mx-auto flex max-w-6xl items-center justify-between px-6 pb-8 text-xs tracking-[0.2em] text-ash uppercase md:px-10">
+      <div className="absolute inset-x-0 bottom-0 z-10 mx-auto flex max-w-6xl items-center justify-between px-6 pb-8 text-xs tracking-[0.2em] text-graphite uppercase md:px-10">
         <span>{profile.section}</span>
-        <a href="#about" className="transition-colors hover:text-ink">Scroll ↓</a>
       </div>
     </section>
   )

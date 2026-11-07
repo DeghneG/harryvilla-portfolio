@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom'
 import { projects } from '../data/content'
-import { ImagePlaceholder } from './ImagePlaceholder'
+import { DrawingSheet } from './DrawingSheet'
+import { accents } from '../data/accents'
 import { Reveal } from './Reveal'
 
 export function Work() {
@@ -11,12 +12,13 @@ export function Work() {
         <div className="mt-14 border-t border-stone">
           {projects.map((p, i) => (
             <Reveal key={p.term} as="article" className="grid items-center gap-8 border-b border-stone py-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
-              <div className={`aspect-[4/3] overflow-hidden ${i % 2 ? 'md:order-2' : ''}`}>
-                <ImagePlaceholder src={p.image} alt={p.title} />
+              <div className={i % 2 ? 'md:order-2' : ''}>
+                <DrawingSheet src={p.image} alt={p.title} exhibit={p.term} sheet={`A-10${i + 1}`} accent={p.accent} />
               </div>
               <div>
+                <span aria-hidden className={`mb-5 block h-0.5 w-10 ${accents[p.accent].bg}`} />
                 <h3 className="font-display text-5xl text-ink md:text-6xl">{p.term}</h3>
-                {p.category && <p className="mt-3 text-lg text-slate">{p.category}</p>}
+                {p.category && <p className={`mt-3 text-lg ${accents[p.accent].text}`}>{p.category}</p>}
                 <p className={`${p.category ? 'mt-8' : 'mt-5'} max-w-md font-display text-2xl text-balance text-ink`}>{p.title}</p>
                 {p.course && <p className="mt-1 text-sm text-slate">{p.course}</p>}
                 {p.description && <p className="mt-4 max-w-md leading-relaxed text-slate">{p.description}</p>}

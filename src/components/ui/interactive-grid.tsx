@@ -45,14 +45,16 @@ export function InteractiveGrid({ className = '', size = 44, radius = 2.4 }: Int
     }
 
     const draw = () => {
-      const color = getComputedStyle(canvas).color
+      const style = getComputedStyle(canvas)
+      const color = style.color
+      const heatColor = style.getPropertyValue('--grid-heat').trim() || color
       ctx.clearRect(0, 0, w, h)
       ctx.globalAlpha = 1
       for (let i = 0; i < heat.length; i++) {
         const v = heat[i]
         if (v < 0.01) continue
         ctx.globalAlpha = v * 0.32
-        ctx.fillStyle = color
+        ctx.fillStyle = heatColor
         ctx.fillRect((i % cols) * size, Math.floor(i / cols) * size, size, size)
       }
       ctx.globalAlpha = 0.4
