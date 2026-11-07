@@ -4,6 +4,7 @@ import { profile } from '../data/content'
 const links = [
   { to: '/#about', label: 'About' },
   { to: '/#work', label: 'Work' },
+  { to: '/#technologies', label: 'Tech' },
   { to: '/#philosophy', label: 'About Me' },
   { to: '/#contact', label: 'Contact' },
 ]

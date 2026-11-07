@@ -14,6 +14,7 @@ export function Contact() {
             Facebook
           </a>
         </Reveal>
+        <Reveal as="p" delay={0.3} className="mt-8 text-stone">{profile.location}</Reveal>
         <div className="mt-24 flex flex-wrap justify-between gap-4 border-t border-slate pt-6 text-xs text-stone">
           <span>{profile.name} · {profile.section}</span>
           <span>Digital Portfolio</span>

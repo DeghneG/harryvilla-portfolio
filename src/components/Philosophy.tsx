@@ -8,6 +8,10 @@ export function Philosophy() {
       <Reveal as="blockquote" delay={0.2} className="mt-8 font-display text-4xl leading-tight text-ink md:text-6xl">
         {profile.philosophy}
       </Reveal>
+      <Reveal delay={0.3} className="mt-14">
+        <p className="text-xs tracking-[0.2em] text-ash uppercase">Motto</p>
+        <p className="mt-3 text-lg text-slate">{profile.motto}</p>
+      </Reveal>
     </section>
   )
 }
