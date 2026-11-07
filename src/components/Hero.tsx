@@ -11,8 +11,8 @@ export function Hero() {
         <Reveal as="h1" delay={0.15} className="font-display text-6xl leading-[0.95] tracking-tight md:text-8xl">
           {profile.name}
         </Reveal>
-        <Reveal as="p" delay={0.35} className="mx-auto mt-6 max-w-xl text-lg text-slate md:text-xl">
-          {profile.tagline}
+        <Reveal as="p" delay={0.35} className="mt-8 font-display text-2xl text-ink italic md:text-3xl">
+          {profile.motto}
         </Reveal>
       </div>
     </section>

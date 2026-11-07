@@ -1,4 +1,5 @@
 import { categories } from '../data/content'
+import { Credentials } from './Credentials'
 import { Reveal } from './Reveal'
 
 export function About() {
@@ -15,6 +16,7 @@ export function About() {
           ))}
         </Reveal>
       </div>
+      <Credentials />
     </section>
   )
 }

@@ -70,11 +70,11 @@ export const moreProjects: MoreProject[] = Array.from({ length: 6 }, () => ({
   course: 'Course / Subject',
 }))
 
-/** PLACEHOLDER — replace each list with your real technologies. */
+/** Edit these lists to match your own skills. */
 export const technologies = [
-  { id: 'frontend', label: 'Front End', items: ['Technology 1', 'Technology 2', 'Technology 3', 'Technology 4'] },
-  { id: 'backend', label: 'Back End', items: ['Technology 1', 'Technology 2', 'Technology 3', 'Technology 4'] },
-  { id: 'tools', label: 'Tools', items: ['Tool 1', 'Tool 2', 'Tool 3', 'Tool 4'] },
+  { id: 'frontend', label: 'Front End', items: ['HTML', 'CSS', 'JavaScript', 'TypeScript'] },
+  { id: 'backend', label: 'Back End', items: ['Python', 'Java', 'PHP', 'SQL'] },
+  { id: 'tools', label: 'Tools', items: ['Git', 'GitHub', 'VS Code', 'Figma'] },
 ]
 
 export const credentials = {
