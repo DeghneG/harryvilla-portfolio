@@ -51,11 +51,11 @@ export function InteractiveGrid({ className = '', size = 44, radius = 2.4 }: Int
       for (let i = 0; i < heat.length; i++) {
         const v = heat[i]
         if (v < 0.01) continue
-        ctx.globalAlpha = v * 0.22
+        ctx.globalAlpha = v * 0.32
         ctx.fillStyle = color
         ctx.fillRect((i % cols) * size, Math.floor(i / cols) * size, size, size)
       }
-      ctx.globalAlpha = 0.28
+      ctx.globalAlpha = 0.4
       ctx.strokeStyle = color
       ctx.lineWidth = 1
       ctx.beginPath()

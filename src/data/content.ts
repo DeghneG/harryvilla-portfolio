@@ -11,17 +11,17 @@ export const profile = {
 }
 
 export interface Project {
-  term: 'Prelim' | 'Midterm' | 'Finals'
+  term: 'Prelim' | 'Midterm' | 'Finals' | 'Capstone'
   /** Exhibit category (from the sitemap). Also the title of its "more projects" page. */
-  category: string
+  category?: string
   /** URL slug for the category page: /category/<slug> */
-  slug: string
+  slug?: string
   /** PLACEHOLDER — replace with the real school project title. */
   title: string
   /** PLACEHOLDER — replace with the course / subject name. */
-  course: string
+  course?: string
   /** PLACEHOLDER — replace with a short description of the project. */
-  description: string
+  description?: string
   /** Set to a path in /public (e.g. "/projects/prelim.jpg") to replace the placeholder image. */
   image?: string
 }
@@ -50,6 +50,10 @@ export const projects: Project[] = [
     title: 'Project Title',
     course: 'Course / Subject',
     description: 'Short description of this school project goes here.',
+  },
+  {
+    term: 'Capstone',
+    title: 'CareSync: An Integrated Clinic Appointment, Medical Records, Billing, and Pharmacy Management System',
   },
 ]
 

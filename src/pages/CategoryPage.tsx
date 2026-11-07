@@ -22,8 +22,8 @@ export function CategoryPage() {
         <Link to="/#work" className="text-xs tracking-[0.2em] text-ash uppercase transition-colors hover:text-ink">
           ← Portfolio exhibits
         </Link>
-        <Reveal as="p" delay={0.1} className="mt-10 text-xs tracking-[0.2em] text-ash uppercase">{category.term}</Reveal>
-        <Reveal as="h1" delay={0.2} className="mt-3 font-display text-5xl text-ink md:text-7xl">{category.category}</Reveal>
+        <Reveal as="h1" delay={0.1} className="mt-10 font-display text-5xl text-ink md:text-7xl">{category.category}</Reveal>
+        <Reveal as="p" delay={0.2} className="mt-4 text-lg text-slate">{category.term}</Reveal>
 
         <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
           {moreProjects.map((p, i) => (

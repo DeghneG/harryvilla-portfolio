@@ -15,17 +15,20 @@ export function Work() {
                 <ImagePlaceholder src={p.image} alt={p.title} />
               </div>
               <div>
-                <p className="text-xs tracking-[0.2em] text-ash uppercase">{p.term} · {p.category}</p>
-                <h3 className="mt-3 font-display text-3xl text-ink md:text-4xl">{p.title}</h3>
-                <p className="mt-2 text-sm text-slate">{p.course}</p>
-                <p className="mt-4 max-w-md leading-relaxed text-slate">{p.description}</p>
-                <Link
-                  to={`/category/${p.slug}`}
-                  className="group mt-8 inline-flex items-center gap-3 rounded-full border border-graphite px-6 py-3 text-sm text-ink transition-colors hover:bg-graphite hover:text-paper"
-                >
-                  Explore more projects
-                  <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
-                </Link>
+                <h3 className="font-display text-5xl text-ink md:text-6xl">{p.term}</h3>
+                {p.category && <p className="mt-3 text-lg text-slate">{p.category}</p>}
+                <p className={`${p.category ? 'mt-8' : 'mt-5'} max-w-md font-display text-2xl text-balance text-ink`}>{p.title}</p>
+                {p.course && <p className="mt-1 text-sm text-slate">{p.course}</p>}
+                {p.description && <p className="mt-4 max-w-md leading-relaxed text-slate">{p.description}</p>}
+                {p.slug && (
+                  <Link
+                    to={`/category/${p.slug}`}
+                    className="group mt-8 inline-flex items-center gap-3 rounded-full border border-graphite px-6 py-3 text-sm text-ink transition-colors hover:bg-graphite hover:text-paper"
+                  >
+                    Explore more projects
+                    <span aria-hidden className="transition-transform group-hover:translate-x-1">→</span>
+                  </Link>
+                )}
               </div>
             </Reveal>
           ))}

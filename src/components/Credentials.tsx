@@ -17,7 +17,7 @@ export function Credentials() {
             {credentials.education.map((e) => (
               <li key={e.level} className="flex items-baseline justify-between gap-6">
                 <span className="font-display text-2xl text-ink">{e.level}</span>
-                <span className="text-sm text-slate">{e.years}</span>
+                <span className="text-sm text-slate tabular-nums">{e.years}</span>
               </li>
             ))}
           </ul>

@@ -7,10 +7,11 @@ interface Props {
   className?: string
   delay?: number
   stagger?: boolean
+  duration?: number
 }
 
-export function Reveal({ children, as: Tag = 'div', className, delay, stagger }: Props) {
-  const ref = useReveal({ delay, children: stagger })
+export function Reveal({ children, as: Tag = 'div', className, delay, stagger, duration }: Props) {
+  const ref = useReveal({ delay, duration, children: stagger })
   return (
     <Tag ref={ref} className={className}>
       {children}
