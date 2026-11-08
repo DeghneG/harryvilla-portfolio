@@ -27,7 +27,6 @@ export function Work() {
                 {p.category && <p className={`mt-3 text-lg ${accents[p.accent].text}`}>{p.category}</p>}
                 <p className={`${p.category ? 'mt-8' : 'mt-5'} max-w-md font-display text-2xl text-balance text-ink`}>{p.title}</p>
                 {p.course && <p className="mt-1 text-sm text-slate">{p.course}</p>}
-                {p.description && <p className="mt-4 max-w-md leading-relaxed text-pretty text-slate">{p.description}</p>}
                 {p.slug && (
                   <Link
                     to={`/category/${p.slug}`}

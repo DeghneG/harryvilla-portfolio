@@ -24,8 +24,6 @@ export interface Project {
   title: string
   /** PLACEHOLDER — replace with the course / subject name. */
   course?: string
-  /** PLACEHOLDER — replace with a short description of the project. */
-  description?: string
   /** Set to a path in /public (e.g. "/projects/prelim.jpg") to replace the placeholder image. */
   image?: string
 }
@@ -38,8 +36,6 @@ export const projects: Project[] = [
     slug: 'columns-and-archways',
     title: 'Compilation of Prelim Outputs',
     course: 'BSIT 3-C · Information Technology',
-    description:
-      'A compilation of my prelim outputs from my IT courses: programming activities, laboratory exercises and web design projects.',
   },
   {
     term: 'Midterm',
@@ -48,8 +44,6 @@ export const projects: Project[] = [
     slug: 'materials-and-craftsmanship',
     title: 'Compilation of Midterm Outputs',
     course: 'BSIT 3-C · Information Technology',
-    description:
-      'A compilation of my midterm outputs.',
   },
   {
     term: 'Finals',
@@ -58,8 +52,6 @@ export const projects: Project[] = [
     slug: 'ancient-modern',
     title: 'Compilation of Finals Outputs',
     course: 'BSIT 3-C · Information Technology',
-    description:
-      'A compilation of my finals outputs from my IT courses: programming activities, laboratory exercises and web design projects.',
   },
   {
     term: 'Capstone',
