@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import type { AccentName } from '../data/accents'
+import { accents, type AccentName } from '../data/accents'
 import type { MoreProject } from '../data/content'
 import { DrawingSheet } from './DrawingSheet'
 import { Lightbox } from './Lightbox'
@@ -14,15 +14,18 @@ interface Props {
 export function ExhibitViewer({ items, accent }: Props) {
   const [index, setIndex] = useState(0)
   const [open, setOpen] = useState(false)
-  const item = items[index]
+  // Keep the position valid even if the project list changes while the page is open.
+  const current = Math.min(index, items.length - 1)
+  const item = items[current]
   const many = items.length > 1
-  const step = (dir: number) => setIndex((i) => (i + dir + items.length) % items.length)
+  const step = (dir: number) => setIndex(() => (current + dir + items.length) % items.length)
 
   return (
     <div>
       <DrawingSheet
         src={item.image}
         video={item.video}
+        label={item.fileLabel}
         alt={item.title}
         accent={accent}
         footer={
@@ -38,10 +41,15 @@ export function ExhibitViewer({ items, accent }: Props) {
       />
       {many && (
         <p className="mt-3 text-sm text-slate" aria-live="polite">
-          {item.title} · {index + 1} / {items.length}
+          {item.title} · {current + 1} / {items.length}
         </p>
       )}
-      <Lightbox items={items} index={index} open={open} onClose={() => setOpen(false)} onIndex={setIndex} />
+      {item.href && !(item.image || item.video) && (
+        <a href={item.href} download className={`mt-2 inline-block text-sm underline underline-offset-4 ${accents[accent].text}`}>
+          {item.hrefLabel ?? 'Download ↓'}
+        </a>
+      )}
+      <Lightbox items={items} index={current} open={open} onClose={() => setOpen(false)} onIndex={setIndex} />
     </div>
   )
 }

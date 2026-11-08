@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { accents, type AccentName } from '../data/accents'
 
 interface Props {
@@ -7,6 +7,8 @@ interface Props {
   /** Video file; its first frame is shown as the thumbnail. */
   video?: string
   alt: string
+  /** Text shown on the empty sheet, e.g. the type of file when there is no preview. */
+  label?: string
   /** Controls shown under the frame (e.g. previous / play / next). */
   footer?: ReactNode
 }
@@ -16,14 +18,17 @@ interface Props {
  * corner registration marks and an optional footer for controls. Without
  * an image it shows an empty sheet with a centre mark.
  */
-export function DrawingSheet({ src, video, alt, footer, accent = 'bronze' }: Props) {
+export function DrawingSheet({ src, video, alt, label, footer, accent = 'bronze' }: Props) {
   const a = accents[accent]
+  // If an image fails to load, fall back to the empty sheet instead of a broken-image icon.
+  const [failed, setFailed] = useState<string | null>(null)
+  const showImage = !!src && failed !== src
 
   return (
     <figure className="border border-graphite/40 bg-paper p-3 md:p-4">
       <div className="relative aspect-[4/3] overflow-hidden border border-graphite/40">
-        {src ? (
-          <img src={src} alt={alt} loading="lazy" className="size-full bg-ink object-contain" />
+        {showImage ? (
+          <img key={src} src={src} alt={alt} decoding="async" onError={() => setFailed(src ?? null)} className="size-full bg-ink object-contain" />
         ) : video ? (
           <>
             <video
@@ -41,10 +46,17 @@ export function DrawingSheet({ src, video, alt, footer, accent = 'bronze' }: Pro
             </span>
           </>
         ) : (
-          <svg aria-hidden viewBox="0 0 40 30" preserveAspectRatio="none" className="absolute inset-0 size-full text-stone">
-            <path d="M20 0V30M0 15H40" stroke="currentColor" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
-            <circle cx="20" cy="15" r="2.2" fill="none" stroke="currentColor" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
-          </svg>
+          <>
+            <svg aria-hidden viewBox="0 0 40 30" preserveAspectRatio="none" className="absolute inset-0 size-full text-stone">
+              <path d="M20 0V30M0 15H40" stroke="currentColor" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
+              <circle cx="20" cy="15" r="2.2" fill="none" stroke="currentColor" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
+            </svg>
+            {label && (
+              <span className="absolute inset-0 grid place-items-center px-6 text-center text-sm text-slate">
+                <span className="bg-paper px-3 py-1">{label}</span>
+              </span>
+            )}
+          </>
         )}
         {/* corner registration marks */}
         {['left-1.5 top-1.5', 'right-1.5 top-1.5', 'left-1.5 bottom-1.5', 'right-1.5 bottom-1.5'].map((pos) => (

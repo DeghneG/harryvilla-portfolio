@@ -69,7 +69,7 @@ export function Lightbox({ items, index, open, onClose, onIndex }: Props) {
             <div className="flex flex-wrap items-center gap-2">
               {item.href && (
                 <a href={item.href} target="_blank" rel="noreferrer" className={ctrl}>
-                  Open PDF ↗
+                  {item.hrefLabel ?? 'Open PDF ↗'}
                 </a>
               )}
               {many && (

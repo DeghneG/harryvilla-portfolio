@@ -75,8 +75,12 @@ export interface MoreProject {
   image?: string
   /** Optional video file in /public; plays in the larger view. */
   video?: string
-  /** Optional link, e.g. the full PDF. */
+  /** Optional link, e.g. the full PDF or a downloadable file. */
   href?: string
+  /** Text for the link (default "Open PDF ↗"). */
+  hrefLabel?: string
+  /** Shown on the sheet when there is no image or video, e.g. "Adobe Animate project (.fla)". */
+  fileLabel?: string
 }
 
 const outputTitles = [
@@ -110,8 +114,26 @@ const realOutputs: Record<string, MoreProject[]> = {
       course: 'BSIT 3-C · Midterm',
       video: '/Midterm/Messenger_creation_A31A8734-6CDD-42D8-AC62-A4F532F3E427.mp4',
     },
+    {
+      title: 'Daily Routine',
+      course: 'BSIT 3-C · Midterm',
+      video: '/Midterm/daily-routine.mp4',
+    },
   ],
-  Finals: [],
+  Finals: [
+    {
+      title: 'Stop Motion Video',
+      course: 'BSIT 3-C · Finals',
+      video: '/Finals/d7181d3d-32f5-49a0-b426-570fc99e7e66.mp4',
+    },
+    {
+      title: 'Creating a First Adobe Animate Project',
+      course: 'BSIT 3-C · Finals',
+      href: '/Finals/Villa_Creating_a_First_Adobe_Animate_Project.fla',
+      hrefLabel: 'Download .fla ↓',
+      fileLabel: 'Adobe Animate project (.fla)',
+    },
+  ],
 }
 
 export const realOutputsFor = (term: string): MoreProject[] => realOutputs[term] ?? []

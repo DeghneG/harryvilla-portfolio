@@ -41,6 +41,7 @@ export function CategoryPage() {
               <DrawingSheet
                 src={p.image}
                 video={p.video}
+                label={p.fileLabel}
                 alt={p.title}
                 accent={category.accent}
                 footer={
@@ -53,6 +54,11 @@ export function CategoryPage() {
               />
               <h2 className="mt-4 font-display text-2xl text-ink">{p.title}</h2>
               <p className="mt-1 text-sm text-slate">{p.course}</p>
+              {p.href && !(p.image || p.video) && (
+                <a href={p.href} download className={`mt-3 inline-block text-sm underline underline-offset-4 ${accents[category.accent].text}`}>
+                  {p.hrefLabel ?? 'Download ↓'}
+                </a>
+              )}
             </Reveal>
           ))}
         </div>
