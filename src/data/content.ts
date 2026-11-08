@@ -49,7 +49,7 @@ export const projects: Project[] = [
     title: 'Compilation of Midterm Outputs',
     course: 'BSIT 3-C · Information Technology',
     description:
-      'A compilation of my midterm outputs from my IT courses: programming activities, laboratory exercises and web design projects.',
+      'A compilation of my midterm outputs.',
   },
   {
     term: 'Finals',
@@ -73,6 +73,10 @@ export interface MoreProject {
   title: string
   course: string
   image?: string
+  /** Optional video file in /public; plays in the larger view. */
+  video?: string
+  /** Optional link, e.g. the full PDF. */
+  href?: string
 }
 
 const outputTitles = [
@@ -84,8 +88,40 @@ const outputTitles = [
   'Mobile App Prototype',
 ]
 
-export const moreProjectsFor = (term: string): MoreProject[] =>
-  outputTitles.map((title) => ({ title, course: `BSIT 3-C · ${term}` }))
+// Add your real outputs here. They appear first on each term's page, and you can
+// step through them with the arrow buttons on the home page.
+const realOutputs: Record<string, MoreProject[]> = {
+  Prelim: [],
+  Midterm: [
+    {
+      title: 'Scan Sync QR Code',
+      course: 'BSIT 3-C · Midterm',
+      image: '/Midterm/scan-sync-qr-code.png',
+      href: '/Midterm/Villa_Infographic.pdf',
+    },
+    {
+      title: 'A Day in the Life: Stickman',
+      course: 'BSIT 3-C · Midterm',
+      image: '/Midterm/a-day-in-the-life-stickman.png',
+      href: '/Midterm/A_day_in_the_life_stickman.pdf',
+    },
+    {
+      title: 'Campus Interview',
+      course: 'BSIT 3-C · Midterm',
+      video: '/Midterm/Messenger_creation_A31A8734-6CDD-42D8-AC62-A4F532F3E427.mp4',
+    },
+  ],
+  Finals: [],
+}
+
+export const realOutputsFor = (term: string): MoreProject[] => realOutputs[term] ?? []
+
+export const moreProjectsFor = (term: string): MoreProject[] => {
+  const real = realOutputs[term] ?? []
+  // Once a term has real outputs, show only those. Until then, show placeholders.
+  if (real.length) return real
+  return outputTitles.map((title) => ({ title, course: `BSIT 3-C · ${term}` }))
+}
 
 /** Edit these lists to match your own skills. */
 export const technologies = [

@@ -1,12 +1,16 @@
+import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { moreProjectsFor, projects } from '../data/content'
 import { DrawingSheet } from '../components/DrawingSheet'
+import { Lightbox } from '../components/Lightbox'
 import { Reveal } from '../components/Reveal'
+import { SheetControls } from '../components/SheetControls'
 import { accents } from '../data/accents'
 
 export function CategoryPage() {
   const { slug } = useParams()
   const category = projects.find((p) => p.slug === slug)
+  const [view, setView] = useState<{ open: boolean; index: number }>({ open: false, index: 0 })
 
   if (!category) {
     return (
@@ -17,7 +21,9 @@ export function CategoryPage() {
     )
   }
 
-  const sheetLetter = 'ABCD'[projects.indexOf(category)]
+  const items = moreProjectsFor(category.term)
+  // Only projects that have an image or video can be opened in the larger view.
+  const viewable = items.filter((p) => p.image || p.video)
 
   return (
     <section className="bg-mist pt-40 pb-28 md:pb-40">
@@ -30,15 +36,34 @@ export function CategoryPage() {
         <Reveal as="p" delay={0.3} className="mt-3 max-w-md text-pretty text-slate">{category.description}</Reveal>
 
         <div className="mt-16 grid gap-x-6 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
-          {moreProjectsFor(category.term).map((p, i) => (
+          {items.map((p, i) => (
             <Reveal key={i} as="article">
-              <DrawingSheet src={p.image} alt={p.title} exhibit={category.term} sheet={`${sheetLetter}-${201 + i}`} accent={category.accent} />
+              <DrawingSheet
+                src={p.image}
+                video={p.video}
+                alt={p.title}
+                accent={category.accent}
+                footer={
+                  <SheetControls
+                    accent={category.accent}
+                    canPlay={!!(p.image || p.video)}
+                    onPlay={() => setView({ open: true, index: viewable.indexOf(p) })}
+                  />
+                }
+              />
               <h2 className="mt-4 font-display text-2xl text-ink">{p.title}</h2>
               <p className="mt-1 text-sm text-slate">{p.course}</p>
             </Reveal>
           ))}
         </div>
       </div>
+      <Lightbox
+        items={viewable}
+        index={view.index}
+        open={view.open && viewable.length > 0}
+        onClose={() => setView((v) => ({ ...v, open: false }))}
+        onIndex={(index) => setView({ open: true, index })}
+      />
     </section>
   )
 }

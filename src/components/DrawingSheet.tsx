@@ -1,33 +1,45 @@
+import type { ReactNode } from 'react'
 import { accents, type AccentName } from '../data/accents'
 
 interface Props {
   accent?: AccentName
   src?: string
+  /** Video file; its first frame is shown as the thumbnail. */
+  video?: string
   alt: string
-  /** Exhibit name shown in the title block, e.g. "Prelim". */
-  exhibit: string
-  /** Sheet number shown in the title block, e.g. "A-101". */
-  sheet: string
+  /** Controls shown under the frame (e.g. previous / play / next). */
+  footer?: ReactNode
 }
 
 /**
  * Frames a project image like an architectural drawing sheet: border,
- * corner registration marks and a title block. Without an image it shows
- * an empty sheet with a centre mark.
+ * corner registration marks and an optional footer for controls. Without
+ * an image it shows an empty sheet with a centre mark.
  */
-export function DrawingSheet({ src, alt, exhibit, sheet, accent = 'bronze' }: Props) {
+export function DrawingSheet({ src, video, alt, footer, accent = 'bronze' }: Props) {
   const a = accents[accent]
-  const cells = [
-    { label: 'Exhibit', value: exhibit },
-    { label: 'Scale', value: 'N.T.S.' },
-    { label: 'Sheet', value: sheet, accent: true },
-  ]
 
   return (
     <figure className="border border-graphite/40 bg-paper p-3 md:p-4">
       <div className="relative aspect-[4/3] overflow-hidden border border-graphite/40">
         {src ? (
-          <img src={src} alt={alt} loading="lazy" className="size-full object-cover" />
+          <img src={src} alt={alt} loading="lazy" className="size-full bg-ink object-contain" />
+        ) : video ? (
+          <>
+            <video
+              src={`${video}#t=0.5`}
+              preload="metadata"
+              muted
+              playsInline
+              aria-label={alt}
+              className="size-full bg-ink object-contain"
+            />
+            <span aria-hidden className="absolute inset-0 grid place-items-center">
+              <span className="grid size-14 place-items-center rounded-full bg-ink/60 text-paper">
+                <svg viewBox="0 0 24 24" className="size-6" fill="currentColor"><path d="M8 5.5v13a.5.5 0 0 0 .76.43l10.4-6.5a.5.5 0 0 0 0-.86L8.76 5.07A.5.5 0 0 0 8 5.5Z" /></svg>
+              </span>
+            </span>
+          </>
         ) : (
           <svg aria-hidden viewBox="0 0 40 30" preserveAspectRatio="none" className="absolute inset-0 size-full text-stone">
             <path d="M20 0V30M0 15H40" stroke="currentColor" strokeWidth="0.12" vectorEffect="non-scaling-stroke" />
@@ -40,14 +52,7 @@ export function DrawingSheet({ src, alt, exhibit, sheet, accent = 'bronze' }: Pr
         ))}
       </div>
 
-      <figcaption className="mt-3 grid grid-cols-[1.4fr_1fr_1fr] border border-graphite/40">
-        {cells.map((c, i) => (
-          <div key={c.label} className={`px-3 py-2 ${i > 0 ? 'border-l border-graphite/40' : ''}`}>
-            <p className="text-[11px] tracking-[0.18em] text-ash uppercase">{c.label}</p>
-            <p className={`mt-0.5 text-xs tabular-nums ${c.accent ? `font-medium ${a.text}` : 'text-ink'}`}>{c.value}</p>
-          </div>
-        ))}
-      </figcaption>
+      {footer}
     </figure>
   )
 }

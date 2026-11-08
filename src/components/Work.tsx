@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
-import { projects } from '../data/content'
-import { DrawingSheet } from './DrawingSheet'
+import { projects, realOutputsFor } from '../data/content'
+import { ExhibitViewer } from './ExhibitViewer'
 import { accents } from '../data/accents'
 import { Reveal } from './Reveal'
 import { Rule } from './Rule'
@@ -16,7 +16,10 @@ export function Work() {
             <div key={p.term}>
             <Reveal as="article" className="grid items-center gap-8 py-10 md:grid-cols-[1.1fr_1fr] md:gap-16">
               <div className={i % 2 ? 'md:order-2' : ''}>
-                <DrawingSheet src={p.image} alt={p.title} exhibit={p.term} sheet={`A-10${i + 1}`} accent={p.accent} />
+                <ExhibitViewer
+                    accent={p.accent}
+                    items={realOutputsFor(p.term).length ? realOutputsFor(p.term) : [{ title: p.title, course: p.course ?? '', image: p.image }]}
+                  />
               </div>
               <div>
                 <span aria-hidden className={`mb-5 block h-0.5 w-10 ${accents[p.accent].bg}`} />
