@@ -153,7 +153,7 @@ export const technologies = [
     id: 'tools',
     label: 'Tools',
     accent: 'bronze' as AccentName,
-    items: ['Git', 'GitHub', 'Antigravity', 'Canva', 'Adobe Illustrator', 'Stop Motion Studio', 'Vercel'],
+    items: ['Git', 'GitHub', 'Antigravity', 'Canva', 'Adobe Illustrator', 'Stop Motion Studio', 'CapCut', 'Vercel'],
   },
 ]
 
