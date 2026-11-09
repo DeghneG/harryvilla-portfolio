@@ -69,8 +69,10 @@ export interface MoreProject {
   video?: string
   /** Optional link, e.g. the full PDF or a downloadable file. */
   href?: string
-  /** Text for the link (default "Open PDF ↗"). */
+  /** Text for the link (default "Open ↗", or "Download ↓" when `download` is set). */
   hrefLabel?: string
+  /** Download the linked file instead of opening it in a new tab. */
+  download?: boolean
   /** Shown on the sheet when there is no image or video, e.g. "Adobe Animate project (.fla)". */
   fileLabel?: string
 }
@@ -87,19 +89,44 @@ const outputTitles = [
 // Add your real outputs here. They appear first on each term's page, and you can
 // step through them with the arrow buttons on the home page.
 const realOutputs: Record<string, MoreProject[]> = {
-  Prelim: [],
+  Prelim: [
+    {
+      title: 'ScanSync: A QR Code-Based Attendance Monitoring System with Parent Notification for the University of San Agustin',
+      course: 'BSIT 3-C · Prelim',
+      image: '/Prelim/scansync-presentation.png',
+      href: 'https://www.canva.com/design/DAHQLYOxb04/4LI43Pmzs3JtOqXOvxrM0A/edit',
+      hrefLabel: 'Open presentation in Canva ↗',
+    },
+    {
+      title: 'BandLab',
+      course: 'BSIT 3-C · Prelim',
+      image: '/Prelim/bandlab.png',
+    },
+    {
+      title: 'Cat Thought Translation App: Multimedia Matrix',
+      course: 'BSIT 3-C · Prelim',
+      image: '/Prelim/multimedia-matrix.png',
+    },
+    {
+      title: 'Ocean Waves',
+      course: 'BSIT 3-C · Prelim',
+      video: '/Prelim/screen-recording.mp4',
+    },
+  ],
   Midterm: [
     {
       title: 'Scan Sync QR Code',
       course: 'BSIT 3-C · Midterm',
       image: '/Midterm/scan-sync-qr-code.png',
       href: '/Midterm/Villa_Infographic.pdf',
+      hrefLabel: 'View PDF ↗',
     },
     {
       title: 'A Day in the Life: Stickman',
       course: 'BSIT 3-C · Midterm',
       image: '/Midterm/a-day-in-the-life-stickman.png',
       href: '/Midterm/A_day_in_the_life_stickman.pdf',
+      hrefLabel: 'View PDF ↗',
     },
     {
       title: 'Campus Interview',
@@ -123,6 +150,7 @@ const realOutputs: Record<string, MoreProject[]> = {
       course: 'BSIT 3-C · Finals',
       href: '/Finals/Villa_Creating_a_First_Adobe_Animate_Project.fla',
       hrefLabel: 'Download .fla ↓',
+      download: true,
       fileLabel: 'Adobe Animate project (.fla)',
     },
   ],

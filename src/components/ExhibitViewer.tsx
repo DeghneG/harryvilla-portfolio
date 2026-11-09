@@ -1,7 +1,8 @@
 import { useState } from 'react'
-import { accents, type AccentName } from '../data/accents'
+import type { AccentName } from '../data/accents'
 import type { MoreProject } from '../data/content'
 import { DrawingSheet } from './DrawingSheet'
+import { ItemLink } from './ItemLink'
 import { Lightbox } from './Lightbox'
 import { SheetControls } from './SheetControls'
 
@@ -44,11 +45,7 @@ export function ExhibitViewer({ items, accent }: Props) {
           {item.title} · {current + 1} / {items.length}
         </p>
       )}
-      {item.href && !(item.image || item.video) && (
-        <a href={item.href} download className={`mt-2 inline-block text-sm underline underline-offset-4 ${accents[accent].text}`}>
-          {item.hrefLabel ?? 'Download ↓'}
-        </a>
-      )}
+      <ItemLink item={item} accent={accent} className="mt-2" />
       <Lightbox items={items} index={current} open={open} onClose={() => setOpen(false)} onIndex={setIndex} />
     </div>
   )

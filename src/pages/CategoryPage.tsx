@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { moreProjectsFor, projects } from '../data/content'
 import { DrawingSheet } from '../components/DrawingSheet'
+import { ItemLink } from '../components/ItemLink'
 import { Lightbox } from '../components/Lightbox'
 import { Reveal } from '../components/Reveal'
 import { SheetControls } from '../components/SheetControls'
@@ -53,11 +54,7 @@ export function CategoryPage() {
               />
               <h2 className="mt-4 font-display text-2xl text-ink">{p.title}</h2>
               <p className="mt-1 text-sm text-slate">{p.course}</p>
-              {p.href && !(p.image || p.video) && (
-                <a href={p.href} download className={`mt-3 inline-block text-sm underline underline-offset-4 ${accents[category.accent].text}`}>
-                  {p.hrefLabel ?? 'Download ↓'}
-                </a>
-              )}
+              <ItemLink item={p} accent={category.accent} className="mt-3" />
             </Reveal>
           ))}
         </div>
