@@ -10,7 +10,6 @@ const nav = [
   { to: '/#work', label: 'Work' },
   { to: '/#technologies', label: 'Technologies' },
   { to: '/#philosophy', label: 'Philosophy' },
-  { to: '/#contact', label: 'Contact' },
 ]
 
 gsap.registerPlugin(ScrollTrigger, useGSAP)

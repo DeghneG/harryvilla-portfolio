@@ -7,7 +7,6 @@ const links = [
   { id: 'work', label: 'Work' },
   { id: 'technologies', label: 'Tech' },
   { id: 'philosophy', label: 'Philosophy' },
-  { id: 'contact', label: 'Contact' },
 ]
 
 export function Nav() {
